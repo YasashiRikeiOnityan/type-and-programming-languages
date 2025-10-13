@@ -3,7 +3,7 @@
 \usepackage[top=20mm,bottom=20mm,left=20mm,right=20mm]{geometry}
 
 \usepackage{amsmath, tikz}
-\newcommand{\ansja}[1]{\noindent\textbf{回答 #1}\\[2mm]}
+\newcommand{\ansja}[1]{\noindent\textbf{解答 #1}\\[2mm]}
 \newcommand{\ansen}[1]{\noindent\textbf{Ans #1}\\[2mm]}
 \newcommand{\maru}[1]{\hspace{-0.25em}\raisebox{-0.7ex}[0ex][0ex]{
     \tikz{
@@ -11,90 +11,88 @@
         \draw (0,0) node {#1};
     }
 }\hspace{-0.25em}}
-\newcommand{\owari}[0]{\hfill\fbox{}}
+\newcommand{\qed}[0]{\hfill\fbox{}}
 
 \begin{document}
 
     \ansja{2.2.6}
         $R$ の反射的閉包を $R^{=}$ として，$R^{=} \subseteq R^\prime$ かつ $R^\prime \subseteq R^{=}$ を示す． \\
         $R^\prime = R \cup \{(s,s) \mid s \in S\}$ を\maru{1}とおく．
-        \begin{enumerate}
-            \item $R^{=} \subseteq R^\prime$ \\[2mm]
+        \begin{itemize}
+            \item $R^{=} \subseteq R^\prime$ の証明 \\[2mm]
             \maru{1}より，すべての $s \in S$ に対して $(s,s) \in R^\prime$ であるから $R^\prime$ は反射的である． \\
-            また，$R^\prime$ は $R$ を含むため，$R^{=} \subseteq R^\prime$ である．
-            \item $R^\prime \subseteq R^{=}$ \\[2mm]
-            $(s,t) \in R^\prime$ とすると，\maru{1}より，$(s,t) \in R$ または $s=t$ である．
+            また，$R^\prime$ は $R$ を含む．$R^{=}$ は $R$ を含む最小の反射的関係であるため，$R^{=} \subseteq R^\prime$ である．
+            \item $R^\prime \subseteq R^{=}$の証明 \\[2mm]
+            $(s,t) \in R^\prime$ とすると，\maru{1}より，$(s,t) \in R$ または $s=t \; (s \in S)$ である．
             \begin{itemize}
                 \item $(s,t) \in R$ のとき，$R \subseteq R^{=}$ より，$(s,t) \in R^{=}$ である．
-                \item $s=t$ のとき，$(s,t)=(s,s) \in R^{=}$ である．
+                \item $s=t \; (s \in S)$ のとき，$(s,t)=(s,s) \in R^{=}$ である．
             \end{itemize}
             したがって，$R^\prime \subseteq R^{=}$ である．
-        \end{enumerate}
-        以上から， $R^\prime = R^{=}$ である．\owari
+        \end{itemize}
+        以上から，$R^\prime = R^{=}$ である．\qed
 
     \vspace{10mm}
 
     \ansen{2.2.6}
         Let $R^{=}$ be the reflexive closure of $R$. We show that $R^{=} \subseteq R^\prime$ and $R^\prime \subseteq R^{=}$. \\
         Let $R^\prime = R \cup \{(s,s) \mid s \in S\}$ be \maru{1}.
-        \begin{enumerate}
-            \item $R^{=} \subseteq R^\prime$ \\[2mm]
-            By \maru{1}, we have $(s,s) \in R^\prime$ for all $s \in S$, so $R^\prime$ is reflexive. \\
-            Since $R^\prime$ contains $R$, we have $R^{=} \subseteq R^\prime$.
-            \item $R^\prime \subseteq R^{=}$ \\[2mm]
-            Suppose $(s,t) \in R^\prime$. Then by \maru{1}, either $(s,t) \in R$ or $s=t$.
+        \begin{itemize}
+            \item Proof of $R^{=} \subseteq R^\prime$ \\[2mm]
+            By \maru{1}, $R^\prime$ is reflexive since $(s,s) \in R^\prime$ for all $s \in S$. \\
+            Moreover, $R^\prime$ contains $R$. Since $R^{=}$ is the minimal reflexive relation containing $R$, we have $R^{=} \subseteq R^\prime$.
+            \item Proof of $R^\prime \subseteq R^{=}$ \\[2mm]
+            Suppose $(s,t) \in R^\prime$. Then by \maru{1}, either $(s,t) \in R$ or $s=t \; (s \in S)$.
             \begin{itemize}
-                \item If $(s,t) \in R$, then $(s,t) \in R^{=}$ since $R \subseteq R^{=}$.
-                \item If $s=t$, then $(s,t)=(s,s) \in R^{=}$.
+            \item If $(s,t) \in R$, then $(s,t) \in R^{=}$ since $R \subseteq R^{=}$.
+            \item If $s=t \; (s \in S)$, then $(s,t)=(s,s) \in R^{=}$.
             \end{itemize}
             Therefore, $R^\prime \subseteq R^{=}$.
-        \end{enumerate}
-        Hence, $R^\prime = R^{=}$.\owari
+        \end{itemize}
+        Hence, $R^\prime = R^{=}$.\qed
 
     \pagebreak
 
     \ansja{2.2.7}
-        $R^{T}$を$R$の推移的閉包とする． $R^{T} \subseteq R^{+}$と$R^{+} \subseteq R^{T}$を示す．
-        \begin{enumerate}
+        $R^{T}$ を $R$ の推移的閉包とする． $R^{T} \subseteq R^{+}$ と $R^{+} \subseteq R^{T}$ を示す．
+        \begin{itemize}
             \item $R^{T} \subseteq R^{+}$ \\[2mm]
-            $(s,t),(t,u) \in R^{+}$とすると，ある$i,j$が存在して$(s,t) \in R_i$かつ$(t,u) \in R_j$である． \\
-            $R^{+}$の定義より$(s,u) \in R_{\mathrm{max}(i,j)+1}$であり，したがって$(s,u) \in R^{+}$． \\
-            よって$R^{+}$は推移的である． \\
-            また$R^{+}$は$R$を含むので，$R^{T} \subseteq R^{+}$である．
+            $(s,t),(t,u) \in R^{+}$ とすると，ある $i,j$ が存在して $(s,t) \in R_i$ かつ $(t,u) \in R_j$ である． \\
+            $R^{+}$ の定義より $(s,u) \in R_{\mathrm{max}(i,j)+1}$ であり，したがって，$(s,u) \in R^{+}$． \\
+            よって，$R^{+}$ は推移的である． \\
+            また，$R^{+}$ は $R$ を含む．$R^{T}$ は $R$ を含む最小の推移的関係であるため，$R^{T} \subseteq R^{+}$ である．
             \item $R^{+} \subseteq R^{T}$ \\[2mm]
-            任意の$i$について$R_i \subseteq R^{T}$を数学的帰納法で示す．
+            任意の $i$ について $R_i \subseteq R^{T}$ であることを数学的帰納法で示す．
             \begin{itemize}
-                \item $i=0$のとき，$R_0 = R \subseteq R^{T}$．
-                \item $i=n$のとき$R_n \subseteq R^{T}$と仮定する． \\
-                $i=n+1$のとき，$(s,u) \in R_{n+1}$とすると，ある$t \in S$が存在して$(s,t),(t,u) \in R_n$．
-                帰納法の仮定より$(s,t),(t,u) \in R^{T}$であり，$R^{T}$が推移的なので$(s,u) \in R^{T}$．
+                \item $i=0$ のとき，$R_0 = R \subseteq R^{T}$．
+                \item $i=n$ のとき$R_i \subseteq R^{T}$ が成り立つと仮定して，$i=n+1$ のとき \\
+                $(s,u) \in R_{n+1}$ とすると，ある $t \in S$ が存在して $(s,t),(t,u) \in R_n$ である． \\
+                帰納法の仮定より $(s,t),(t,u) \in R^{T}$ であり，$R^{T}$ は推移的なので $(s,u) \in R^{T}$．
             \end{itemize}
-            よって$R^{+} \subseteq R^{T}$．
-        \end{enumerate}
-        以上より$R^{+} = R^{T}$．\owari
+            したがって，$R^{+} \subseteq R^{T}$ である．
+        \end{itemize}
+        以上から，$R^{+} = R^{T}$ である．\qed
 
     \vspace{10mm}
 
     \ansen{2.2.7}
         Let $R^{T}$ be the transitive closure of $R$. We show that $R^{T} \subseteq R^{+}$ and $R^{+} \subseteq R^{T}$.
-        \begin{enumerate}
+        \begin{itemize}
             \item $R^{T} \subseteq R^{+}$ \\[2mm]
-            Suppose $(s,t), (t,u) \in R^{+}$. Then there exist some $i,j$ such that $(s,t) \in R_i$ and $(t,u) \in R_j$. \\
-            By the definition of $R^{+}$, we have $(s,u) \in R_{\mathrm{max}(i,j)+1}$, so $(s,u) \in R^{+}$. \\
-            Therefore, $R^{+}$ is transitive. \\
-            Since $R^{+}$ contains $R$, we have $R^{T} \subseteq R^{+}$.
+                Suppose $(s,t), (t,u) \in R^{+}$. Then there exist some $i,j$ such that $(s,t) \in R_i$ and $(t,u) \in R_j$. \\
+                By the definition of $R^{+}$, we have $(s,u) \in R_{\mathrm{max}(i,j)+1}$, and therefore $(s,u) \in R^{+}$. \\
+                Thus, $R^{+}$ is transitive. \\
+                Moreover, $R^{+}$ contains $R$. Since $R^{T}$ is the minimal transitive relation containing $R$, we have $R^{T} \subseteq R^{+}$.
             \item $R^{+} \subseteq R^{T}$ \\[2mm]
-            We prove that $R_i \subseteq R^{T}$ for all $i$ by mathematical induction.
-            \begin{itemize}
-                \item When $i=0$, we have $R_0 = R \subseteq R^{T}$.
-                \item Assume $R_n \subseteq R^{T}$ for $i=n$. \\
-                When $i=n+1$, suppose $(s,u) \in R_{n+1}$. Then there exists some $t \in S$ such that $(s,t),(t,u) \in R_n$.
-                By the induction hypothesis, $(s,t),(t,u) \in R^{T}$, and
-                since $R^{T}$ is transitive, we have $(s,u) \in R^{T}$.
-            \end{itemize}
-            Therefore, $R^{+} \subseteq R^{T}$.
-        \end{enumerate}
-        Hence, $R^{+} = R^{T}$．\owari
-        
-    
+                We prove that $R_i \subseteq R^{T}$ for all $i$ by mathematical induction.
+                \begin{itemize}
+                    \item When $i=0$, $R_0 = R \subseteq R^{T}$.
+                    \item Assuming $R_i \subseteq R^{T}$ holds for $i=n$, let's prove for $i=n+1$. \\
+                        If $(s,u) \in R_{n+1}$, then there exists some $t \in S$ such that $(s,t),(t,u) \in R_n$. \\
+                        By the induction hypothesis, $(s,t),(t,u) \in R^{T}$, and since $R^{T}$ is transitive, $(s,u) \in R^{T}$.
+                \end{itemize}
+                Therefore, $R^{+} \subseteq R^{T}$.
+        \end{itemize}
+        Hence, $R^{+} = R^{T}$.\qed
+
 \end{document}

@@ -1,5 +1,9 @@
+# LaTeX
 *.dvi
 *.log
 *.aux
 *.out
 *.toc
+
+# Idris
+build/
