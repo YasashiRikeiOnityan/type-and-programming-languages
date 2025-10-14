@@ -1,0 +1,176 @@
+\documentclass[a4paper,11pt,fleqn,dvipdfmx]{article}
+
+\usepackage[top=20mm,bottom=20mm,left=20mm,right=20mm]{geometry}
+
+\usepackage{amsmath, amssymb, tikz}
+\newcommand{\ansja}[1]{\noindent\textbf{解答 #1}\\[2mm]}
+\newcommand{\ansen}[1]{\noindent\textbf{Ans #1}\\[2mm]}
+\newcommand{\maru}[1]{\hspace{-0.25em}\raisebox{-0.7ex}[0ex][0ex]{
+    \tikz{
+        \draw (0,0) circle (0.18cm);
+        \draw (0,0) node {#1};
+    }
+}\hspace{-0.25em}}
+\newcommand{\qed}[0]{\hfill\fbox{}}
+\newcommand\Tau{\mathcal{T}}
+\newcommand{\kakko}[1]{\raisebox{.2ex}{(}#1\raisebox{.2ex}{)}}
+\newcommand{\syomei}{\raisebox{-0.8ex}[0ex][0ex]{\tikz{\draw[line width=0.8pt, rounded corners=2pt] (0,0) -- (0.69,0) -- (0.69,0.36) -- (0,0.36) -- cycle;\draw[line width=0.3pt] (0.345,0.17) node {\textcolor{black}{\footnotesize \bf 証明}};}}\quad}
+\newcommand{\syomeien}{\raisebox{-0.8ex}[0ex][0ex]{\tikz{\draw[line width=0.8pt, rounded corners=2pt] (0,0) -- (1.1,0) -- (1.1,0.36) -- (0,0.36) -- cycle;\draw[line width=0.3pt] (0.535,0.17) node {\textcolor{black}{\footnotesize \bf Proof}};}}\quad}
+
+\begin{document}
+
+    \ansja{3.2.4}
+        \begin{align*}
+            n(S_0) &= 0 \\
+            n(S_1) &= 3 + 3 \times 0 + 0 ^ 3 = 3 \\
+            n(S_2) &= 3 + 3 \times 3 + 3 ^ 3 = 39 \\
+            n(S_3) &= 3 + 3 \times 39 + 39 ^ 3 = 59439
+        \end{align*}
+
+    \vspace{10mm}
+
+    \ansja{3.2.5}
+        任意の $i$ について $S_i \subseteq S_{i+1}$ であることを数学的帰納法で示す．
+        \begin{itemize}
+            \item $i=0$ のとき \\[2mm]
+                $S_0 = \emptyset$ より， $S_0 \subseteq S_1$ である．
+            \item $i=1$ のとき \\[2mm]
+                $S_1 = \{\texttt{true}, \; \texttt{false}, \; 0\}$ より，$S_1 \subseteq S_2$ である．
+            \item $i=k$ のとき，$S_i \subseteq S_{i+1}$ が成り立つと仮定して，$i=k+1$ のとき \\[2mm]
+                $t_1 \in S_{k+1}$ について
+                \begin{itemize}
+                    \item $t_1$ が定数のとき \\[2mm]
+                        $S$ の定義より，$t_1 \in S_{k+2}$ である．
+                    \item $t_1 = \texttt{succ } t_2$ または $t_1 = \texttt{pred } t_2$ または $t_1 = \texttt{iszero } t_2$ のとき \\[2mm]
+                        $S$ の定義より，$t_2 \in S_k$ であり，帰納法の仮定から $t_2 \in S_{k+1}$ を得る． \\
+                        ゆえに，$S$ の定義から $t_1 \in S_{k+2}$ である．
+                    \item $t_1 = \texttt{if } t_2 \texttt{ then } t_3 \texttt{ else } t_4$ のとき \\[2mm]
+                        $S$ の定義より，$t_2, t_3, t_4 \in S_k$ であり，帰納法の仮定から $t_2, t_3, t_4 \in S_{k+1}$ を得る． \\
+                        ゆえに，$S$ の定義から $t_1 \in S_{k+2}$ である．
+                \end{itemize}
+                したがって，$S_{i+1} \subseteq S_{i+2}$ が成り立つ．
+        \end{itemize}
+        以上から，各 $i$ について $S_i \subseteq S_{i+1}$ であるので，集合 $S_i$ は累積的である．
+
+    \pagebreak
+
+    \ansen{3.2.5}
+        We prove that $S_i \subseteq S_{i+1}$ holds for all $i$ by mathematical induction.
+        \begin{itemize}
+            \item For $i=0$ \\[2mm]
+                Since $S_0 = \emptyset$, $S_0 \subseteq S_1$ holds.
+            \item For $i=1$ \\[2mm]
+                Since $S_1 = \{\texttt{true}, \; \texttt{false}, \; 0\}$, $S_1 \subseteq S_2$ holds.
+            \item Assume $S_i \subseteq S_{i+1}$ holds for $i=k$, then for $i=k+1$ \\[2mm]
+                For $t_1 \in S_{k+1}$
+                \begin{itemize}
+                    \item When $t_1$ is a constant \\[2mm]
+                        By definition of $S$, $t_1 \in S_{k+2}$.
+                    \item When $t_1 = \texttt{succ } t_2$ or $t_1 = \texttt{pred } t_2$ or $t_1 = \texttt{iszero } t_2$ \\[2mm]
+                        By definition of $S$, $t_2 \in S_k$, and by induction hypothesis, we get $t_2 \in S_{k+1}$. \\
+                        Therefore, by definition of $S$, $t_1 \in S_{k+2}$.
+                    \item When $t_1 = \texttt{if } t_2 \texttt{ then } t_3 \texttt{ else } t_4$ \\[2mm]
+                        By definition of $S$, $t_2, t_3, t_4 \in S_k$, and by induction hypothesis, we get $t_2, t_3, t_4 \in S_{k+1}$. \\
+                        Therefore, by definition of $S$, $t_1 \in S_{k+2}$.
+                \end{itemize}
+                Hence, $S_{i+1} \subseteq S_{i+2}$ holds.
+        \end{itemize}
+        From the above, since $S_i \subseteq S_{i+1}$ holds for each $i$, the set $S_i$ is cumulative.
+
+    \vspace{10mm}
+
+    \ansja{3.2.6}
+        命題3.2.6の証明例が少々分かりにくかったので，私なりにまとめてみる． \\[5mm]
+        $\Tau$ はある条件を満たす最小の集合と定義された．よって，\kakko{$a$} と \kakko{$b$} を示せば十分．
+        \begin{itemize}
+            \item [\kakko{$a$}] $S$ は条件を満たすこと
+            \item [\kakko{$b$}] $S$ は条件を満たす集合の中で最小であること
+        \end{itemize}
+        ある条件：
+        \begin{itemize}
+            \item [\kakko{1}] $\{\texttt{true}, \; \texttt{false}, \; 0\} \in \Tau$
+            \item [\kakko{2}] $t_1 \in \Tau$ ならば $\texttt{succ } t_1, \; \texttt{pred } t_1, \; \texttt{iszero } t_1 \in \Tau$
+            \item [\kakko{3}] $t_1, t_2, t_3 \in \Tau$ ならば $\texttt{if } t_1 \texttt{ then } t_2 \texttt{ else } t_3 \in \Tau$
+        \end{itemize}
+        $\syomei$ 以下，証明を行う．
+        \begin{itemize}
+            \item [\kakko{$\boldsymbol{a}$}] {\bf $S$ は条件を満たすこと}
+            \begin{itemize}
+                \item $S_1 = \{\texttt{true}, \; \texttt{false}, \; 0\}$ より，条件\kakko{1}を満たす．
+                \item ある $i$ が存在して，$t_1 \in S_i$ のとき，$S$ の定義より， \\
+                    $\texttt{succ } t_1, \; \texttt{pred } t_1, \; \texttt{iszero } t_1 \in S_{i+1}$ であるから，条件\kakko{2}を満たす．
+                \item ある $i$ が存在して，$t_1, t_2, t_3 \in S_i$ のとき，$S$ の定義より， \\
+                    $\texttt{if } t_1 \texttt{ then } t_2 \texttt{ else } t_3 \in S_{i+1}$ であるから，条件\kakko{3}を満たす．
+            \end{itemize}
+            \item [\kakko{$\boldsymbol{b}$}] {\bf $S$ は条件を満たす集合の中で最小であること} \\[2mm]
+            ある集合 $S^\prime$ が条件\kakko{1}, \kakko{2}, \kakko{3}を満たすとする．すべての $i$ に対して $S_i \subseteq S^\prime$ であることを示す．
+            \begin{itemize}
+                \item $i=0$ のとき \\[2mm]
+                    $S_0 = \emptyset \subseteq S^\prime$ である．
+                \item $i=1$ のとき \\[2mm]
+                    $S_1 = \{\texttt{true}, \; \texttt{false}, \; 0\}$ であり，条件\kakko{1}より，$S_1 \subseteq S^\prime$ である．
+                \item $i=k$ のとき，$S_i \subseteq S^\prime$ が成り立つと仮定して，$i=k+1$ のとき \\[2mm]
+                    $t_1 \in S_{k+1}$ について
+                    \begin{itemize}
+                        \item $t_1$ が定数のとき \\[2mm]
+                            $S$ の定義より，$t_1 \in S_k$ である．よって，帰納法の仮定より，$t_1 \in S^\prime$ である．
+                        \item $t_1 = \texttt{succ } t_2$ または $t_1 = \texttt{pred } t_2$ または $t_1 = \texttt{iszero } t_2$ のとき \\[2mm]
+                            $S$ の定義より， $t_2 \in S_k$ である．帰納法の仮定より，$S_k \subseteq S^\prime$ であるから，$t_2 \in S^\prime$ を得る．よって，条件\kakko{2}より，$t_1 \in S^\prime$ である．
+                        \item $t_1 = \texttt{if } t_2 \texttt{ then } t_3 \texttt{ else } t_4$ のとき \\[2mm]
+                            $S$ の定義より，$t_2, t_3, t_4 \in S_k$ である．帰納法の仮定より，$S_k \subseteq S^\prime$ であるから，$t_2, t_3, t_4 \in S^\prime$ を得る．よって，条件\kakko{3}より，$t_1 \in S^\prime$ である．
+                    \end{itemize}
+                したがって，すべての $i$ に対して $S_i \subseteq S^\prime$ であるから，$S = \displaystyle \bigcup_{i=0}^{\infty} S_i \subseteq S^\prime$ が成り立つ．
+            \end{itemize}
+            以上から，$S$ はある条件を満たす最小の集合である．
+        \end{itemize}
+        \kakko{$a$} と \kakko{$b$} が示されたので，$\Tau = S$ を得る．\qed
+
+    \vspace{10mm}
+
+    \ansen{3.2.6}
+        Since the example proof of Proposition 3.2.6 was somewhat difficult to understand, I'll summarize it in my own way. \\[5mm]
+        $\Tau$ was defined as the smallest set satisfying certain conditions. Therefore, it is sufficient to show \kakko{$a$} and \kakko{$b$}.
+        \begin{itemize}
+            \item [\kakko{$a$}] $S$ satisfies the conditions
+            \item [\kakko{$b$}] $S$ is the smallest among sets satisfying the conditions
+        \end{itemize}
+        The conditions:
+        \begin{itemize}
+            \item [\kakko{1}] $\{\texttt{true}, \; \texttt{false}, \; 0\} \in \Tau$
+            \item [\kakko{2}] if $t_1 \in \Tau$ then $\texttt{succ } t_1, \; \texttt{pred } t_1, \; \texttt{iszero } t_1 \in \Tau$
+            \item [\kakko{3}] if $t_1, t_2, t_3 \in \Tau$ then $\texttt{if } t_1 \texttt{ then } t_2 \texttt{ else } t_3 \in \Tau$
+        \end{itemize}
+        $\syomeien$ In what follows, we give a proof.
+        \begin{itemize}
+            \item [\kakko{$\boldsymbol{a}$}] {\bf $S$ satisfies the conditions}
+            \begin{itemize}
+                \item Since $S_1 = \{\texttt{true}, \; \texttt{false}, \; 0\}$, it satisfies condition \kakko{1}.
+                \item When there exists some $i$ such that $t_1 \in S_i$, by definition of $S$, \\
+                    $\texttt{succ } t_1, \; \texttt{pred } t_1, \; \texttt{iszero } t_1 \in S_{i+1}$, thus satisfying condition \kakko{2}.
+                \item When there exists some $i$ such that $t_1, t_2, t_3 \in S_i$, by definition of $S$, \\
+                    $\texttt{if } t_1 \texttt{ then } t_2 \texttt{ else } t_3 \in S_{i+1}$, thus satisfying condition \kakko{3}.
+            \end{itemize}
+            \item [\kakko{$\boldsymbol{b}$}] {\bf $S$ is the smallest among sets satisfying the conditions} \\[2mm]
+            Let $S^\prime$ be a set satisfying conditions \kakko{1}, \kakko{2}, \kakko{3}. We show that $S_i \subseteq S^\prime$ for all $i$.
+            \begin{itemize}
+                \item For $i=0$ \\[2mm]
+                    $S_0 = \emptyset \subseteq S^\prime$.
+                \item For $i=1$ \\[2mm]
+                    Since $S_1 = \{\texttt{true}, \; \texttt{false}, \; 0\}$ and by condition \kakko{1}, $S_1 \subseteq S^\prime$.
+                \item Assume $S_i \subseteq S^\prime$ holds for $i=k$, then for $i=k+1$ \\[2mm]
+                    For $t_1 \in S_{k+1}$
+                    \begin{itemize}
+                        \item When $t_1$ is a constant \\[2mm]
+                            By definition of $S$, $t_1 \in S_k$. Thus, by induction hypothesis, $t_1 \in S^\prime$.
+                        \item When $t_1 = \texttt{succ } t_2$ or $t_1 = \texttt{pred } t_2$ or $t_1 = \texttt{iszero } t_2$ \\[2mm]
+                            By definition of $S$, $t_2 \in S_k$. By induction hypothesis, since $S_k \subseteq S^\prime$, we get $t_2 \in S^\prime$. Therefore, by condition \kakko{2}, $t_1 \in S^\prime$.
+                        \item When $t_1 = \texttt{if } t_2 \texttt{ then } t_3 \texttt{ else } t_4$ \\[2mm]
+                            By definition of $S$, $t_2, t_3, t_4 \in S_k$. By induction hypothesis, since $S_k \subseteq S^\prime$, we get $t_2, t_3, t_4 \in S^\prime$. Therefore, by condition \kakko{3}, $t_1 \in S^\prime$.
+                    \end{itemize}
+                Thus, since $S_i \subseteq S^\prime$ holds for all $i$, we have $S = \displaystyle \bigcup_{i=0}^{\infty} S_i \subseteq S^\prime$.
+            \end{itemize}
+            From the above, $S$ is the smallest set satisfying the conditions.
+        \end{itemize}
+        Since \kakko{$a$} and \kakko{$b$} have been shown, we obtain $\Tau = S$.\qed
+
+\end{document}
